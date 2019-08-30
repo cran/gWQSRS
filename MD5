@@ -1,0 +1,8 @@
+c42b2ccbce83031234a197626c91d117 *DESCRIPTION
+b4e33571a1923b2a1ce411b6e913ab7a *NAMESPACE
+48a70741dee6c5b17058dad8675d7f7d *R/data.R
+d5e313c786e2317438b11d205e3e456d *R/gwqsrs.R
+08d2964342799ceccec6ce1b449443b4 *R/gwqsrs_helpers.R
+c2b7246f2c2ca8a7f3f7d371349b4170 *data/wqs_data.RData
+fe558f30c4848685a031460233b8f5d3 *man/gwqsrs.Rd
+d6954c6b94cb086a8ed565aff3f0c5ba *man/wqs_data.Rd
