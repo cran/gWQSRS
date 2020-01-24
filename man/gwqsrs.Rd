@@ -4,13 +4,31 @@
 \alias{gwqsrs}
 \title{Fitting Weighted Quantile Sum Random Subset regression models}
 \usage{
-gwqsrs(formula, data, na.action, weights, mix_name, stratified, valid_var,
-  rs = 100, n_vars = NULL, b1_pos = TRUE, b1_constr = FALSE,
-  zero_infl = FALSE, q = 4, validation = 0.6, family = gaussian,
+gwqsrs(
+  formula,
+  data,
+  na.action,
+  weights,
+  mix_name,
+  stratified,
+  valid_var,
+  rs = 100,
+  n_vars = NULL,
+  b1_pos = TRUE,
+  b1_constr = FALSE,
+  zero_infl = FALSE,
+  q = 4,
+  validation = 0.6,
+  family = gaussian,
   zilink = c("logit", "probit", "cloglog", "cauchit", "log"),
-  seed = NULL, pred = 0, plots = FALSE, tables = FALSE,
-  plan_strategy = "sequential", control = list(rho = 1, outer.iter =
-  400, inner.iter = 800, delta = 1e-07, tol = 1e-08, trace = 0))
+  seed = NULL,
+  pred = 0,
+  plots = FALSE,
+  tables = FALSE,
+  plan_strategy = "sequential",
+  control = list(rho = 1, outer.iter = 400, inner.iter = 800, delta = 1e-07, tol =
+    1e-08, trace = 0)
+)
 }
 \arguments{
 \item{formula}{An object of class \code{formula} specifying the relationship to be tested. The \code{wqs}

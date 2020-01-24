@@ -140,6 +140,7 @@
 #' @importFrom future plan future value
 #' @importFrom future.apply future_lapply
 #' @importFrom pscl zeroinfl
+#' @importFrom aods3 wald.test
 #'
 #' @export
 
@@ -196,6 +197,7 @@ gwqsrs <- function(formula, data, na.action, weights, mix_name, stratified, vali
     Q <- strtfd_out$Q
     mix_name = strtfd_out$mix_name
   }
+  else stratified <- NULL
 
   if(!is.null(seed) & !is.numeric(seed)) stop("seed must be numeric or NULL")
   if(!is.null(seed)) set.seed(seed)
@@ -213,7 +215,7 @@ gwqsrs <- function(formula, data, na.action, weights, mix_name, stratified, vali
   m <- match(c("weights"), names(mc), 0)
   if(m[1]) weights <- dtf[, weights, drop = FALSE]
   else  dtf$weights <- weights <- rep(1, N)
-  par_model = rs.par.modl.est(dtf[rindex$it,], Q[rindex$it,], formula, ff, weights[rindex$it], rs, n_vars, b1_pos, b1_constr, family, zilink, zero_infl, plan_strategy, seed, control)
+  par_model = rs.par.modl.est(dtf[rindex$it,], Q[rindex$it,], formula, ff, weights[rindex$it], rs, n_vars, b1_pos, b1_constr, family, zilink, zero_infl, plan_strategy, seed, stratified, control)
 
   bres = par_model$bres
   conv = par_model$conv
@@ -224,6 +226,7 @@ gwqsrs <- function(formula, data, na.action, weights, mix_name, stratified, vali
 
   mean_weight = rs.mean_weight_f(mix_name, bres, conv, b1_pos, family, n_levels, strata_names, zero_infl)
 
+  # wqs_model = gWQS:::model.fit(mean_weight, dtf[rindex$iv,], Q[rindex$iv,], family, zilink, formula, ff, weights[rindex$iv], stratified, b1_pos, zero_infl)
   wqs_model = gWQS:::model.fit(mean_weight, dtf[rindex$iv,], Q[rindex$iv,], family, zilink, formula, ff, weights[rindex$iv], b1_pos, zero_infl)
 
   if(all(grepl("wqs", attr(terms(formula), "term.labels")))) y_plot <- model.response(model.frame(formula, dtf[rindex$iv,]), "any")
