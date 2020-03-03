@@ -170,7 +170,7 @@ rs.mean_weight_f = function(mix_name, bres, conv, b1_pos, family, n_levels, stra
 
   if (family$family == "multinomial"){
     mean_weight <- lapply(1:(n_levels-1), function(i){
-      # bres[[i]][mix_name][is.na(bres[[i]][mix_name])] = 0
+      bres[[i]][mix_name][is.na(bres[[i]][mix_name])] = 0
       if(b1_pos[i]) w_t = apply(bres[[i]][bres[[i]]$b1 > 0 & conv!=2, mix_name], 2, weighted.mean, abs(bres[[i]][bres[[i]]$b1 > 0 & conv!=2, "stat"]), na.rm = T)
       else if(!b1_pos[i]) w_t = apply(bres[[i]][bres[[i]]$b1 < 0 & conv!=2, mix_name], 2, weighted.mean, abs(bres[[i]][bres[[i]]$b1 < 0 & conv!=2, "stat"]), na.rm = T)
       if (all(is.nan(w_t)))
@@ -182,7 +182,7 @@ rs.mean_weight_f = function(mix_name, bres, conv, b1_pos, family, n_levels, stra
     mean_weight <- list.cbind(mean_weight)
   }
   else{
-    # bres[mix_name][is.na(bres[mix_name])] <- 0
+    bres[mix_name][is.na(bres[mix_name])] <- 0
     if(zero_infl){
       if(b1_pos) mean_weight = apply(bres[bres$b1_count > 0 & conv!=2, mix_name], 2, weighted.mean, abs(bres[bres$b1_count > 0 & conv!=2, "stat_count"]), na.rm = T)
       else mean_weight = apply(bres[bres$b1_count < 0 & conv!=2, mix_name], 2, weighted.mean, abs(bres[bres$b1_count < 0 & conv!=2, "stat_count"]), na.rm = T)
